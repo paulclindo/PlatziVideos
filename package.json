@@ -1,12 +1,13 @@
 {
-  "name": "PlatziVideo",
+  "name": "platzi-videos",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --open --mode development"
+    "start": "webpack-dev-server --open --mode development",
+    "service-fake": "json-server initialState.json"
   },
   "keywords": [],
   "author": "",
