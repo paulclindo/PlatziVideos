@@ -1,6 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from '../containers/Home';
+import Login from '../containers/Login';
 import * as routes from './routes';
 import GlobalStyle from '../themes/globalStyles';
 
@@ -8,7 +9,10 @@ function App() {
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <Route exact path={routes.home} component={Home} />
+      <Switch>
+        <Route exact path={routes.home} component={Home} />
+        <Route path={routes.login} component={Login} />
+      </Switch>
     </BrowserRouter>
   );
 }

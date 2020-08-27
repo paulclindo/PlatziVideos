@@ -5,13 +5,14 @@ import userIcon from '../assets/static/user-icon.png';
 
 const WrapperHeader = styled.header`
   align-items: center;
-  /* background: #8f57fd; */
+  background: ${(props) => (props.transparent ? 'transparent' : '#8f57fd')};
   color: white;
   display: flex;
   height: 100px;
   justify-content: space-between;
-    /* top: 0px; */
-    /* width: 100%; */
+  top: 0px;
+  width: 100%;
+  position:absolute;
 `;
 const LogoImg = styled.img`
    margin-left: 30px;
@@ -54,8 +55,10 @@ const ProfileCard = styled.div`
     width: 40px;
   }
 `;
-const Header = () => (
-  <WrapperHeader>
+const Header = ({
+  transparent,
+}) => (
+  <WrapperHeader transparent={transparent}>
     <LogoImg src={logo} alt='Platzi Video' />
     <Menu>
       <ProfileCard>
