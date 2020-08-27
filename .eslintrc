@@ -26,6 +26,7 @@
         "import"
     ],
     "rules": {
+        "import/prefer-default-export": 0,
         "react/jsx-props-no-spreading": "off",
         "react/jsx-filename-extension": 0,
         "array-bracket-spacing": 2,

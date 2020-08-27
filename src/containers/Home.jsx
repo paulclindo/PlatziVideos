@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Header from '../components/Header';
 import Search from '../components/Search';
-import '../assets/styles/App.scss';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
@@ -12,12 +11,12 @@ import useInitialState from '../hooks/useInitialState';
 
 const API = 'http://localhost:3000/initalState';
 
-const App = () => {
+const Home = () => {
   const initialState = useInitialState(API);
   return initialState.length === 0 ? (
     <h3>Loading...</h3>
   ) : (
-    <div className='App'>
+    <div>
       <Header />
       <Search />
       {initialState.mylist.length > 0 && (
@@ -50,4 +49,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;
