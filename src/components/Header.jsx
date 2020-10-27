@@ -1,26 +1,30 @@
-import React from 'react';
-import styled from 'styled-components';
-import logo from '../assets/static/logo-platzi-video-BW2.png';
-import userIcon from '../assets/static/user-icon.png';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import logo from "../assets/static/logo-platzi-video-BW2.png";
+import userIcon from "../assets/static/user-icon.png";
+import { gravatar } from "../utils/gravatar";
+import { logoutRequest } from "../actions";
 
 const WrapperHeader = styled.header`
   align-items: center;
-  background: ${(props) => (props.transparent ? 'transparent' : '#8f57fd')};
+  background: ${(props) => (props.transparent ? "transparent" : "#8f57fd")};
   color: white;
   display: flex;
   height: 100px;
   justify-content: space-between;
   top: 0px;
   width: 100%;
-  position:absolute;
+  position: absolute;
 `;
 const LogoImg = styled.img`
-   margin-left: 30px;
+  margin-left: 30px;
   width: 200px;
 `;
 const Menu = styled.div`
   margin-right: 30px;
-  &:hover ul{
+  &:hover ul {
     display: block;
   }
   ul {
@@ -38,10 +42,10 @@ const Menu = styled.div`
       margin: 10px 0px;
       a {
         color: white;
-      text-decoration: none;
+        text-decoration: none;
       }
       &:hover {
-      text-decoration: underline;
+        text-decoration: underline;
       }
     }
   }
@@ -55,26 +59,44 @@ const ProfileCard = styled.div`
     width: 40px;
   }
 `;
-const Header = ({
-  transparent,
-}) => (
+const Header = ({ transparent, user, logoutRequest }) => (
   <WrapperHeader transparent={transparent}>
-    <LogoImg src={logo} alt='Platzi Video' />
+    <LogoImg src={logo} alt="Platzi Video" />
     <Menu>
       <ProfileCard>
-        <img src={userIcon} alt='' />
+        {user && user.email ? (
+          <img src={gravatar(user.email)} alt="" />
+        ) : (
+          <img src={userIcon} alt="" />
+        )}
         <p>Perfil</p>
       </ProfileCard>
       <ul>
-        <li>
-          <a href='/'>Cuenta</a>
-        </li>
-        <li>
-          <a href='/'>Cerrar Sesión</a>
-        </li>
+        {user && user.email ? (
+          <>
+            <li>
+              <a href="/">Cuenta</a>
+            </li>
+            <li onClick={() => logoutRequest({})}>
+              <a href="/">Cerrar Sesión</a>
+            </li>
+          </>
+        ) : (
+          <li>
+            <Link to="/login">Iniciar Sesión</Link>
+          </li>
+        )}
       </ul>
     </Menu>
   </WrapperHeader>
 );
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+const mapDispatchToProps = {
+  logoutRequest,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -1,9 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
-import plusIcon from '../assets/static/plus-icon.png';
-import playIcon from '../assets/static/play-icon.png';
+import { connect } from "react-redux";
+import plusIcon from "../assets/static/plus-icon.png";
+import playIcon from "../assets/static/play-icon.png";
+import { setFavorite, deleteFavorite } from "../actions";
 
 const CarouselCardDetails = styled.div`
   align-items: flex-start;
@@ -24,11 +26,10 @@ const CarouselCardDetails = styled.div`
   position: absolute;
   right: 0;
   top: 0;
-  
+
   .img {
     width: 20px;
   }
-
 
   .title {
     color: white;
@@ -59,8 +60,8 @@ export const CarouselCard = styled.div`
     transform: translate3d(100px, 0, 0);
   }
   &:hover ${CarouselCardDetails} {
-  opacity: 1;
-}
+    opacity: 1;
+  }
 `;
 
 const CarouselCardImg = styled.img`
@@ -69,29 +70,59 @@ const CarouselCardImg = styled.img`
   object-fit: cover;
 `;
 
-const CarouselItem = ({ title, cover, year, contentRating, duration }) => (
-  <CarouselCard>
-    <CarouselCardImg src={cover} alt={title} />
-    <CarouselCardDetails>
-      <div>
-        <img
-          className='img'
-          src={playIcon}
-          alt='Play Icon'
-        />
-        <img
-          className='img'
-          src={plusIcon}
-          alt='Plus Icon'
-        />
-      </div>
-      <p className='title'>{title}</p>
-      <p className='subtitle'>
-        {`${year} ${contentRating} ${duration}`}
-      </p>
-    </CarouselCardDetails>
-  </CarouselCard>
-);
+const CarouselItem = ({
+  id,
+  title,
+  cover,
+  year,
+  contentRating,
+  duration,
+  setFavorite,
+  deleteFavorite,
+  isList,
+}) => {
+  const handleFavorite = () => {
+    setFavorite({ id, title, cover, year, contentRating, duration });
+  };
+
+  return (
+    <CarouselCard>
+      <CarouselCardImg src={cover} alt={title} />
+      <CarouselCardDetails>
+        <div>
+          <img className="img" src={playIcon} alt="Play Icon" />
+          {isList ? (
+            <img
+              className="img"
+              src="https://static.platzi.com/media/public/uploads/remove-icon_a56b8107-2c02-49ed-bead-308031b0dd76.png"
+              onClick={() =>
+                // eslint-disable-next-line implicit-arrow-linebreak
+                deleteFavorite({
+                  id,
+                  title,
+                  cover,
+                  year,
+                  contentRating,
+                  duration,
+                })
+              }
+              alt="Delete Icon"
+            />
+          ) : (
+            <img
+              className="img"
+              src={plusIcon}
+              onClick={handleFavorite}
+              alt="Plus Icon"
+            />
+          )}
+        </div>
+        <p className="title">{title}</p>
+        <p className="subtitle">{`${year} ${contentRating} ${duration}`}</p>
+      </CarouselCardDetails>
+    </CarouselCard>
+  );
+};
 
 CarouselItem.propTypes = {
   cover: PropTypes.string,
@@ -100,4 +131,9 @@ CarouselItem.propTypes = {
   contentRating: PropTypes.string,
   duration: PropTypes.number,
 };
-export default CarouselItem;
+
+const mapDispatchToProps = {
+  setFavorite,
+  deleteFavorite,
+};
+export default connect(null, mapDispatchToProps)(CarouselItem);

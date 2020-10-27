@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Container = styled.section`
   display: flex;
@@ -19,7 +19,7 @@ const SearchInput = styled.input`
   border: 2px solid white;
   border-radius: 25px;
   color: white;
-  font-family: 'Muli', sans-serif;
+  font-family: "Muli", sans-serif;
   font-size: 16px;
   height: 50px;
   margin-bottom: 20px;
@@ -34,7 +34,7 @@ const SearchInput = styled.input`
 const Search = () => (
   <Container>
     <h2>¿Qué quieres ver hoy?</h2>
-    <SearchInput type='text' placeholder='Buscar...' />
+    <SearchInput type="text" placeholder="Buscar..." />
   </Container>
 );
 
