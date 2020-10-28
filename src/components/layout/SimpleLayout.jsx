@@ -8,10 +8,7 @@ const Section = styled.section`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 60px 30px;
-  min-height: calc(
-    100vh - 200px
-  ); /* El ancho será igual al tamaño de todo el height menos 200px (100px del header + 100px del footer) */
+  padding: 60px 30px 0;
 `;
 
 const SimpleLayout = ({ children }) => {

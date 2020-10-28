@@ -68,14 +68,16 @@ const Header = ({ transparent, user, logoutRequest }) => (
       <LogoImg src={logo} alt="Platzi Video" />
     </Link>
     <Menu>
-      <ProfileCard>
-        {user && user.email ? (
-          <img src={gravatar(user.email)} alt="" />
-        ) : (
-          <img src={userIcon} alt="" />
-        )}
-        <p>Perfil</p>
-      </ProfileCard>
+      {Object.keys(user).length > 0 && (
+        <ProfileCard>
+          {user.email ? (
+            <img src={gravatar(user.email)} alt="" />
+          ) : (
+            <img src={userIcon} alt="" />
+          )}
+          <p>Perfil</p>
+        </ProfileCard>
+      )}
       <ul>
         {user && user.email ? (
           <>

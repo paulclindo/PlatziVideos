@@ -15,7 +15,6 @@ const LoginSection = styled.section`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 60px 30px;
   min-height: calc(
     100vh - 200px
   ); /* El ancho será igual al tamaño de todo el height menos 200px (100px del header + 100px del footer) */
@@ -64,9 +63,10 @@ const LoginForm = styled.form`
     border-radius: 3px;
     display: inline-block;
     position: relative;
+    margin-right: 10px;
     :checked {
-      background-color: #e9ecee;
-      border: 1px solid #adb8c0;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid #514690;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
         inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05),
         inset 15px 10px -12px rgba(255, 255, 255, 0.1);
