@@ -7,11 +7,21 @@ import Carousel from "../components/Carousel";
 import CarouselItem from "../components/CarouselItem";
 import Footer from "../components/Footer";
 
-const Home = ({ mylist, trends, originals }) => {
+const Home = ({ search, mylist, trends, originals }) => {
+  console.log({ search });
   return (
     <>
       <Header />
       <Search />
+      {search.length > 0 ? (
+        <Categories title="Busquedad">
+          <Carousel>
+            {search.map((item) => (
+              <CarouselItem key={item.id} {...item} />
+            ))}
+          </Carousel>
+        </Categories>
+      ) : null}
       {mylist.length > 0 ? (
         <Categories title="Mi lista">
           <Carousel>
@@ -20,18 +30,7 @@ const Home = ({ mylist, trends, originals }) => {
             ))}
           </Carousel>
         </Categories>
-      ) : (
-        <p
-          style={{
-            margin: "0 30px 60px",
-            color: "white",
-            textTransform: "uppercase",
-            fontSize: "18px",
-          }}
-        >
-          You dont have any favorite for now! :(
-        </p>
-      )}
+      ) : null}
 
       {trends && (
         <Categories title="Tendencias">
@@ -59,6 +58,7 @@ const mapStateToProps = (state) => {
     mylist: state.mylist,
     trends: state.trends,
     originals: state.originals,
+    search: state.search,
   };
 };
 

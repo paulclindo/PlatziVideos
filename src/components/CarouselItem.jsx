@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import * as routes from "../routes/routes";
 import plusIcon from "../assets/static/plus-icon.png";
 import playIcon from "../assets/static/play-icon.png";
 import { setFavorite, deleteFavorite } from "../actions";
@@ -90,13 +91,14 @@ const CarouselItem = ({
       <CarouselCardImg src={cover} alt={title} />
       <CarouselCardDetails>
         <div>
-          <img className="img" src={playIcon} alt="Play Icon" />
+          <Link to={routes.player.replace(":id", id)}>
+            <img className="img" src={playIcon} alt="Play Icon" />
+          </Link>
           {isList ? (
             <img
               className="img"
               src="https://static.platzi.com/media/public/uploads/remove-icon_a56b8107-2c02-49ed-bead-308031b0dd76.png"
               onClick={() =>
-                // eslint-disable-next-line implicit-arrow-linebreak
                 deleteFavorite({
                   id,
                   title,

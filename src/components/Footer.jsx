@@ -1,9 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const FooterWrapper = styled.footer`
   align-items: center;
-  background-color: #8f57fd;
   display: flex;
   height: 100px;
   width: 100%;
@@ -21,9 +20,9 @@ const FooterWrapper = styled.footer`
 
 const Footer = () => (
   <FooterWrapper>
-    <a href='/'>Terminos de uso</a>
-    <a href='/'>Declaración de privacidad</a>
-    <a href='/'>Centro de ayuda</a>
+    <a href="/">Terminos de uso</a>
+    <a href="/">Declaración de privacidad</a>
+    <a href="/">Centro de ayuda</a>
   </FooterWrapper>
 );
 

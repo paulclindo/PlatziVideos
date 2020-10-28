@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/static/logo-platzi-video-BW2.png";
+import * as routes from "../routes/routes";
 import userIcon from "../assets/static/user-icon.png";
 import { gravatar } from "../utils/gravatar";
 import { logoutRequest } from "../actions";
@@ -57,11 +58,15 @@ const ProfileCard = styled.div`
   img {
     margin-right: 8px;
     width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
   }
 `;
 const Header = ({ transparent, user, logoutRequest }) => (
   <WrapperHeader transparent={transparent}>
-    <LogoImg src={logo} alt="Platzi Video" />
+    <Link to={routes.home}>
+      <LogoImg src={logo} alt="Platzi Video" />
+    </Link>
     <Menu>
       <ProfileCard>
         {user && user.email ? (

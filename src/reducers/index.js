@@ -7,17 +7,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         mylist: [...state.mylist, action.payload],
-        trends: state.trends.filter((item) => item.id !== action.payload.id),
-        originals: state.originals.filter(
-          (item) => item.id !== action.payload.id
-        ),
       };
     case "DELETE_FAVORITE":
       return {
         ...state,
         mylist: state.mylist.filter((item) => item.id !== action.payload.id),
-        trends: [...state.trends, action.payload],
-        originals: [...state.originals, action.payload],
       };
     case "LOGIN_REQUEST":
       return {
@@ -33,6 +27,25 @@ export const reducer = (state, action) => {
       return {
         ...state,
         user: action.payload,
+      };
+    case "GET_VIDEO_SOURCE":
+      return {
+        ...state,
+        playing:
+          state.trends.find((item) => item.id === Number(action.payload)) ||
+          state.originals.find((item) => item.id === Number(action.payload)) ||
+          [],
+      };
+    case "SEARCH_VIDEO":
+      console.log(action.payload);
+      if (action.payload === "") return { ...state, search: [] };
+      return {
+        ...state,
+        search: [...state.trends, ...state.originals].filter(
+          (item) =>
+            item.title.toLowerCase().includes(action.payload.toLowerCase())
+          // eslint-disable-next-line function-paren-newline
+        ),
       };
 
     default:

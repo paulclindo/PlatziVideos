@@ -4,7 +4,18 @@ import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import * as routes from "../routes/routes";
 import { registerRequest } from "../actions";
+import Footer from "../components/Footer";
 
+const RegisterSection = styled.section`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 30px;
+  min-height: calc(
+    100vh - 200px
+  ); /* El ancho será igual al tamaño de todo el height menos 200px (100px del header + 100px del footer) */
+`;
 const RegisterContainer = styled.section`
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 40px;
@@ -104,39 +115,44 @@ const Register = ({ registerRequest }) => {
   };
 
   return (
-    <RegisterContainer>
-      <h2>Regístrate</h2>
-      <RegisterForm onSubmit={handleSubmit}>
-        <input
-          className="input"
-          type="text"
-          value={name}
-          name="name"
-          onChange={handleChange}
-          placeholder="Nombre"
-        />
-        <input
-          className="input"
-          type="text"
-          value={email}
-          name="email"
-          onChange={handleChange}
-          placeholder="Correo"
-        />
-        <input
-          className="input"
-          type="password"
-          value={password}
-          name="password"
-          onChange={handleChange}
-          placeholder="Contraseña"
-        />
-        <Button type="submit" className="button">
-          Registrarme
-        </Button>
-      </RegisterForm>
-      <Link to={routes.login}>Iniciar sesión</Link>
-    </RegisterContainer>
+    <>
+      <RegisterSection>
+        <RegisterContainer>
+          <h2>Regístrate</h2>
+          <RegisterForm onSubmit={handleSubmit}>
+            <input
+              className="input"
+              type="text"
+              value={name}
+              name="name"
+              onChange={handleChange}
+              placeholder="Nombre"
+            />
+            <input
+              className="input"
+              type="text"
+              value={email}
+              name="email"
+              onChange={handleChange}
+              placeholder="Correo"
+            />
+            <input
+              className="input"
+              type="password"
+              value={password}
+              name="password"
+              onChange={handleChange}
+              placeholder="Contraseña"
+            />
+            <Button type="submit" className="button">
+              Registrarme
+            </Button>
+          </RegisterForm>
+          <Link to={routes.login}>Iniciar sesión</Link>
+        </RegisterContainer>
+      </RegisterSection>
+      <Footer />
+    </>
   );
 };
 const mapDispatchToProps = {

@@ -11,7 +11,6 @@ import * as routes from "../routes/routes";
 import { loginRequest } from "../actions";
 
 const LoginSection = styled.section`
-  background-image: linear-gradient(#21c08b, #8f57fd);
   display: flex;
   align-items: center;
   flex-direction: column;

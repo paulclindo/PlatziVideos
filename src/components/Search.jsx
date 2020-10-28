@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
+import { searchVideo } from "../actions";
 
 const Container = styled.section`
   display: flex;
@@ -31,11 +33,27 @@ const SearchInput = styled.input`
   width: 70%;
 `;
 
-const Search = () => (
-  <Container>
-    <h2>¿Qué quieres ver hoy?</h2>
-    <SearchInput type="text" placeholder="Buscar..." />
-  </Container>
-);
+const Search = ({ searchVideo }) => {
+  const [searchValue, setSearchValue] = useState("");
 
-export default Search;
+  const handleChange = (event) => {
+    const { value } = event.target;
+    setSearchValue(value);
+    searchVideo(value);
+  };
+  return (
+    <Container>
+      <h2>¿Qué quieres ver hoy?</h2>
+      <SearchInput
+        value={searchValue}
+        onChange={handleChange}
+        type="text"
+        placeholder="Buscar..."
+      />
+    </Container>
+  );
+};
+const mapDispatchToProps = {
+  searchVideo,
+};
+export default connect(null, mapDispatchToProps)(Search);

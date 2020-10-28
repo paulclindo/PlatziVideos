@@ -10,6 +10,7 @@ import Register from "../containers/Register";
 import SimpleLayout from "../components/layout/SimpleLayout";
 import NotFound from "../containers/NotFound";
 import { reducer } from "../reducers";
+import Player from "../containers/Player";
 
 function LoggedInRoute({ isAuthenticated, children, ...rest }) {
   return (
@@ -45,6 +46,7 @@ function App() {
     user: {},
     playing: {},
     mylist: [],
+    search: [],
     trends: [
       {
         id: 2,
@@ -208,7 +210,7 @@ function App() {
   };
 
   const store = createStore(reducer, initialState);
-  console.log(store.getState(), "store");
+  window.store = store.getState();
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -229,6 +231,13 @@ function App() {
             path={routes.home}
           >
             <Home />
+          </LoggedInRoute>
+          <LoggedInRoute
+            isAuthenticated={isAuthenticated}
+            exact
+            path={routes.player}
+          >
+            <Player />
           </LoggedInRoute>
           <Route component={NotFound} />
         </Switch>
